@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
 import { db } from "@/lib/db";
 import {
@@ -37,15 +37,19 @@ export default async function UsersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Users</h1>
-        <p className="text-slate-600">Manage and view all registered users</p>
+        <h1 className="text-3xl font-bold mb-2 text-foreground">Хэрэглэгчид</h1>
+        <p className="text-muted-foreground">
+          Бүх бүртгэлтэй хэрэглэгчдийг удирдаж, үзэх
+        </p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Нийт хэрэглэгчид
+            </CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -55,7 +59,9 @@ export default async function UsersPage() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Admin Users</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Админ хэрэглэгчид
+            </CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -65,7 +71,7 @@ export default async function UsersPage() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Students</CardTitle>
+            <CardTitle className="text-sm font-medium">Оюутан</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -77,18 +83,18 @@ export default async function UsersPage() {
       {/* Users Table */}
       <Card>
         <CardHeader>
-          <CardTitle>All Users</CardTitle>
+          <CardTitle>Бүх хэрэглэгчид</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Role</TableHead>
-                <TableHead>Enrollments</TableHead>
-                <TableHead>Total Spent</TableHead>
-                <TableHead>Joined</TableHead>
+                <TableHead>Нэр</TableHead>
+                <TableHead>Имэйл</TableHead>
+                <TableHead>Үүрэг</TableHead>
+                <TableHead>Элсэлт</TableHead>
+                <TableHead>Нийт зарцуулсан</TableHead>
+                <TableHead>Нэгдсэн</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -101,11 +107,11 @@ export default async function UsersPage() {
                 return (
                   <TableRow key={user.id}>
                     <TableCell className="font-medium">
-                      {user.name || "No name"}
+                      {user.name || "Нэргүй"}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center">
-                        <Mail className="mr-2 h-4 w-4 text-slate-400" />
+                        <Mail className="mr-2 h-4 w-4 text-muted-foreground" />
                         {user.email}
                       </div>
                     </TableCell>
@@ -115,15 +121,15 @@ export default async function UsersPage() {
                           user.role === "ADMIN" ? "default" : "secondary"
                         }
                       >
-                        {user.role}
+                        {user.role === "ADMIN" ? "Админ" : "Оюутан"}
                       </Badge>
                     </TableCell>
                     <TableCell>{user.enrollments.length}</TableCell>
-                    <TableCell>${totalSpent.toFixed(2)}</TableCell>
+                    <TableCell>₮{totalSpent.toFixed(2)}</TableCell>
                     <TableCell>
                       <div className="flex items-center">
-                        <Calendar className="mr-2 h-4 w-4 text-slate-400" />
-                        {new Date(user.createdAt).toLocaleDateString()}
+                        <Calendar className="mr-2 h-4 w-4 text-muted-foreground" />
+                        {new Date(user.createdAt).toLocaleDateString("mn-MN")}
                       </div>
                     </TableCell>
                   </TableRow>
@@ -133,8 +139,8 @@ export default async function UsersPage() {
           </Table>
 
           {users.length === 0 && (
-            <div className="text-center py-8 text-slate-500">
-              No users found.
+            <div className="text-center py-8 text-muted-foreground">
+              Хэрэглэгч олдсонгүй.
             </div>
           )}
         </CardContent>

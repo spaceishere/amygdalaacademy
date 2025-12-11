@@ -1,8 +1,10 @@
 export default function AdminDashboard() {
   return (
     <div>
-        <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-        <p>Welcome to the LMS Admin Panel. Select an option from the sidebar.</p>
+      <h1 className="text-3xl font-bold mb-6 text-foreground">Самбар</h1>
+      <p className="text-muted-foreground">
+        LMS Админ Самбарт тавтай морилно уу. Хажуугийн цэсээс сонголт хийнэ үү.
+      </p>
     </div>
-  )
+  );
 }

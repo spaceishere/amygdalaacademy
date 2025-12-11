@@ -21,16 +21,16 @@ export default async function HomePage() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       <Navbar />
 
       <main className="container mx-auto py-12 px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-            Master New Skills
+          <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+            Шинэ ур чадвар эзэмшээрэй
           </h1>
-          <p className="mt-4 text-lg text-slate-600">
-            Explore our courses and start learning today.
+          <p className="mt-4 text-lg text-muted-foreground">
+            Бидний курсуудыг судалж, өнөө өдөр сурж эхлээрэй.
           </p>
         </div>
 
@@ -62,25 +62,25 @@ export default async function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1">
-                  <div className="flex items-center text-sm text-slate-500 mb-2">
+                  <div className="flex items-center text-sm text-muted-foreground mb-2">
                     <Users className="mr-1 h-4 w-4" />
-                    {displayCount} Students
+                    {displayCount} оюутан
                   </div>
-                  <div className="text-lg font-bold text-slate-900">
-                    {course.price === 0 ? "Free" : `$${course.price}`}
+                  <div className="text-lg font-bold text-foreground">
+                    {course.price === 0 ? "Үнэгүй" : `₮${course.price}`}
                   </div>
                 </CardContent>
                 <CardFooter>
                   <Link href={`/courses/${course.slug}`} className="w-full">
-                    <Button className="w-full">View Course</Button>
+                    <Button className="w-full">Курсыг үзэх</Button>
                   </Link>
                 </CardFooter>
               </Card>
             );
           })}
           {courses.length === 0 && (
-            <div className="col-span-full text-center py-12 text-slate-500">
-              No courses available yet. Check back soon!
+            <div className="col-span-full text-center py-12 text-muted-foreground">
+              Одоогоор курс байхгүй байна. Удахгүй буцаж ирээрэй!
             </div>
           )}
         </div>

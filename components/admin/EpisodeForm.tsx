@@ -140,9 +140,9 @@ export function EpisodeForm({
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Гарчиг</FormLabel>
               <FormControl>
-                <Input placeholder="Episode Title" {...field} />
+                <Input placeholder="Эпизодын гарчиг" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -154,9 +154,9 @@ export function EpisodeForm({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Тайлбар</FormLabel>
               <FormControl>
-                <Textarea placeholder="Episode Description" {...field} />
+                <Textarea placeholder="Эпизодын тайлбар" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -168,7 +168,7 @@ export function EpisodeForm({
           name="order"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Order (Sort Index)</FormLabel>
+              <FormLabel>Дараалал (эрэмбэ)</FormLabel>
               <FormControl>
                 <Input type="number" {...field} />
               </FormControl>
@@ -180,12 +180,12 @@ export function EpisodeForm({
         {/* Video Upload */}
         <div className="space-y-2">
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Video File
+            Видео файл
           </label>
           <Input type="file" accept="video/*" onChange={handleVideoUpload} />
           {form.getValues("videoUrl") && (
             <p className="text-sm text-green-600 truncate">
-              Video uploaded: {form.getValues("videoUrl")}
+              Видео байршуулсан: {form.getValues("videoUrl")}
             </p>
           )}
         </div>
@@ -193,7 +193,7 @@ export function EpisodeForm({
         {/* Thumbnail Upload */}
         <div className="space-y-2">
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Thumbnail Image
+            Миниатюр зураг
           </label>
           <Input
             type="file"
@@ -202,7 +202,7 @@ export function EpisodeForm({
           />
           {form.getValues("thumbnailUrl") && (
             <p className="text-sm text-green-600 truncate">
-              Thumbnail uploaded: {form.getValues("thumbnailUrl")}
+              Зураг байршуулсан: {form.getValues("thumbnailUrl")}
             </p>
           )}
         </div>
@@ -219,7 +219,7 @@ export function EpisodeForm({
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel>Free Preview</FormLabel>
+                <FormLabel>Үнэгүй урьдчилсан харагдац</FormLabel>
               </div>
             </FormItem>
           )}
@@ -227,7 +227,7 @@ export function EpisodeForm({
 
         <Button type="submit" disabled={isLoading} className="w-full">
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {episode ? "Update Episode" : "Create Episode"}
+          {episode ? "Эпизод шинэчлэх" : "Эпизод үүсгэх"}
         </Button>
       </form>
     </Form>

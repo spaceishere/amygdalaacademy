@@ -60,7 +60,7 @@ export default async function CourseDetailPage({
   const isLocked = activeEpisode && !canWatch(activeEpisode);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       <Navbar />
 
       <main className="container mx-auto py-8 px-4">
@@ -74,13 +74,13 @@ export default async function CourseDetailPage({
                 title={activeEpisode.title}
               />
             ) : (
-              <div className="relative bg-slate-900 aspect-video rounded-lg flex flex-col items-center justify-center text-white p-6 text-center overflow-hidden">
+              <div className="relative bg-primary aspect-video rounded-lg flex flex-col items-center justify-center text-primary-foreground p-6 text-center overflow-hidden">
                 {activeEpisode ? (
                   <>
-                    <Lock className="h-12 w-12 mb-4 text-slate-400" />
-                    <h3 className="text-xl font-bold">Content Locked</h3>
-                    <p className="text-slate-300 mb-4">
-                      You must be enrolled to watch this episode.
+                    <Lock className="h-12 w-12 mb-4 text-primary-foreground/50" />
+                    <h3 className="text-xl font-bold">Агуулга түгжигдсэн</h3>
+                    <p className="text-primary-foreground/80 mb-4">
+                      Энэ эпизодыг үзэхийн тулд та элсэлтэй байх ёстой.
                     </p>
                     {!isEnrolled && (
                       <EnrollButton
@@ -118,7 +118,7 @@ export default async function CourseDetailPage({
                         )}
                         {isEnrolled && (
                           <div className="bg-green-600 text-white px-4 py-2 rounded font-medium">
-                            Enrolled
+                            Элсэлтэй
                           </div>
                         )}
                       </div>
@@ -128,11 +128,11 @@ export default async function CourseDetailPage({
               </div>
             )}
 
-            <div className="bg-white p-6 rounded shadow-sm">
-              <h2 className="text-2xl font-bold mb-2">
-                {activeEpisode ? activeEpisode.title : "Course Overview"}
+            <div className="bg-card p-6 rounded shadow-sm border border-border">
+              <h2 className="text-2xl font-bold mb-2 text-foreground">
+                {activeEpisode ? activeEpisode.title : "Курсын тойм"}
               </h2>
-              <p className="text-slate-600">
+              <p className="text-muted-foreground">
                 {activeEpisode ? activeEpisode.description : course.description}
               </p>
             </div>
@@ -140,8 +140,10 @@ export default async function CourseDetailPage({
 
           {/* Sidebar: Episode List */}
           <div className="lg:col-span-1 space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border p-4">
-              <h3 className="font-bold text-lg mb-4">Course Content</h3>
+            <div className="bg-card rounded-lg shadow-sm border border-border p-4">
+              <h3 className="font-bold text-lg mb-4 text-foreground">
+                Курсын агуулга
+              </h3>
               <div className="space-y-1">
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {course.episodes.map((episode: any, index: number) => {
@@ -155,33 +157,33 @@ export default async function CourseDetailPage({
                       className={cn(
                         "flex items-center p-3 rounded cursor-pointer transition-colors",
                         isActive
-                          ? "bg-slate-100 border-l-4 border-blue-600"
-                          : "hover:bg-slate-50",
+                          ? "bg-primary/10 border-l-4 border-primary"
+                          : "hover:bg-muted",
                         !isAccessible && !isActive && "opacity-75"
                       )}
                     >
-                      <div className="mr-3 text-slate-500 text-sm font-mono w-6 text-center">
+                      <div className="mr-3 text-muted-foreground text-sm font-mono w-6 text-center">
                         {index + 1}
                       </div>
                       <div className="flex-1 min-w-0">
                         <p
                           className={cn(
                             "text-sm font-medium truncate",
-                            isActive && "text-blue-600"
+                            isActive && "text-primary"
                           )}
                         >
                           {episode.title}
                         </p>
-                        <div className="flex items-center text-xs text-slate-500 mt-1">
+                        <div className="flex items-center text-xs text-muted-foreground mt-1">
                           {episode.isFreePreview && (
                             <Badge
                               variant="secondary"
                               className="mr-2 text-[10px] px-1 py-0 h-5"
                             >
-                              Free
+                              Үнэгүй
                             </Badge>
                           )}
-                          <span>Video</span>
+                          <span>Видео</span>
                         </div>
                       </div>
                       <div className="ml-2">
@@ -189,35 +191,39 @@ export default async function CourseDetailPage({
                           <CirclePlay
                             className={cn(
                               "h-4 w-4",
-                              isActive ? "text-blue-600" : "text-slate-400"
+                              isActive
+                                ? "text-primary"
+                                : "text-muted-foreground"
                             )}
                           />
                         ) : (
-                          <Lock className="h-4 w-4 text-slate-300" />
+                          <Lock className="h-4 w-4 text-muted-foreground/50" />
                         )}
                       </div>
                     </Link>
                   );
                 })}
                 {course.episodes.length === 0 && (
-                  <p className="text-center text-slate-500 py-4 text-sm">
-                    No episodes content yet.
+                  <p className="text-center text-muted-foreground py-4 text-sm">
+                    Одоогоор эпизод байхгүй байна.
                   </p>
                 )}
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-sm border p-4">
-              <h3 className="font-bold mb-2">Details</h3>
-              <div className="text-sm text-slate-600 space-y-1">
+            <div className="bg-card rounded-lg shadow-sm border border-border p-4">
+              <h3 className="font-bold mb-2 text-foreground">Дэлгэрэнгүй</h3>
+              <div className="text-sm text-muted-foreground space-y-1">
                 <div className="flex justify-between">
-                  <span>Students Enrolled</span>
-                  <span className="font-medium">{displayCount}</span>
+                  <span>Элсэлтэй оюутан</span>
+                  <span className="font-medium text-foreground">
+                    {displayCount}
+                  </span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Last Updated</span>
-                  <span className="font-medium">
-                    {new Date(course.updatedAt).toLocaleDateString()}
+                  <span>Сүүлийн шинэчлэл</span>
+                  <span className="font-medium text-foreground">
+                    {new Date(course.updatedAt).toLocaleDateString("mn-MN")}
                   </span>
                 </div>
               </div>

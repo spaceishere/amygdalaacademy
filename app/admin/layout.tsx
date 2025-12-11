@@ -16,71 +16,62 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-background">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 text-white flex flex-col">
-        <div className="p-6">
-          <h1 className="text-2xl font-bold">LMS Admin</h1>
+      <aside className="w-64 bg-primary text-primary-foreground flex flex-col">
+        <div className="p-6 border-b border-primary/20">
+          <h1 className="text-2xl font-bold">LMS Админ</h1>
         </div>
-        <nav className="flex-1 px-4 space-y-2">
+        <nav className="flex-1 px-4 space-y-2 py-4">
           <Link href="/admin">
             <Button
               variant="ghost"
-              className="w-full justify-start text-white hover:bg-slate-800 hover:text-white"
+              className="w-full justify-start text-primary-foreground hover:bg-primary/90"
             >
               <LayoutDashboard className="mr-2 h-4 w-4" />
-              Dashboard
+              Самбар
             </Button>
           </Link>
           <Link href="/admin/courses">
             <Button
               variant="ghost"
-              className="w-full justify-start text-white hover:bg-slate-800 hover:text-white"
+              className="w-full justify-start text-primary-foreground hover:bg-primary/90"
             >
               <BookOpen className="mr-2 h-4 w-4" />
-              Courses
+              Курсууд
             </Button>
           </Link>
           <Link href="/admin/users">
             <Button
               variant="ghost"
-              className="w-full justify-start text-white hover:bg-slate-800 hover:text-white"
+              className="w-full justify-start text-primary-foreground hover:bg-primary/90"
             >
               <Users className="mr-2 h-4 w-4" />
-              Users
+              Хэрэглэгчид
             </Button>
           </Link>
           <Link href="/admin/enrollments">
             <Button
               variant="ghost"
-              className="w-full justify-start text-white hover:bg-slate-800 hover:text-white"
+              className="w-full justify-start text-primary-foreground hover:bg-primary/90"
             >
               <BookOpen className="mr-2 h-4 w-4" />
-              Enrollments
+              Элсэлтүүд
             </Button>
           </Link>
         </nav>
-        <div className="p-4">
-          <form
-            action={async () => {
-              "use server";
-              // re-import signOut? or just redirect to api/auth/signout
-              // actually easier to use a client component for signout or just a link
-            }}
-          >
-            {/* For now just a link or form if using auth.ts signOut */}
-          </form>
-          <Link href="/api/auth/signout">
+        <div className="p-4 border-t border-primary/20">
+          <Link href="/api/auth/signout" className="w-full block">
             <Button variant="destructive" className="w-full">
               <LogOut className="mr-2 h-4 w-4" />
-              Sign Out
+              Гарах
             </Button>
           </Link>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 bg-slate-50 p-8">{children}</main>
+      <main className="flex-1 bg-background p-8">{children}</main>
     </div>
   );
 }

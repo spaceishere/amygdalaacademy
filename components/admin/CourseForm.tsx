@@ -116,16 +116,16 @@ export default function CourseForm({ course }: CourseFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 bg-white p-6 rounded shadow"
+        className="space-y-8 bg-card p-6 rounded shadow border border-border"
       >
         <FormField
           control={form.control}
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Гарчиг</FormLabel>
               <FormControl>
-                <Input placeholder="Course Title" {...field} />
+                <Input placeholder="Курсын гарчиг" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -137,9 +137,9 @@ export default function CourseForm({ course }: CourseFormProps) {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Тайлбар</FormLabel>
               <FormControl>
-                <Textarea placeholder="Course Description" {...field} />
+                <Textarea placeholder="Курсын тайлбар" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -152,7 +152,7 @@ export default function CourseForm({ course }: CourseFormProps) {
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Price ($)</FormLabel>
+                <FormLabel>Үнэ (₮)</FormLabel>
                 <FormControl>
                   <Input type="number" {...field} />
                 </FormControl>
@@ -166,7 +166,7 @@ export default function CourseForm({ course }: CourseFormProps) {
             name="fakeEnrollmentBonus"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Fake Bonus Students</FormLabel>
+                <FormLabel>Нэмэлт оюутан</FormLabel>
                 <FormControl>
                   <Input type="number" {...field} />
                 </FormControl>
@@ -179,12 +179,12 @@ export default function CourseForm({ course }: CourseFormProps) {
         {/* Thumbnail Upload */}
         <div className="space-y-2">
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Thumbnail Image
+            Миниатюр зураг
           </label>
           <Input type="file" accept="image/*" onChange={handleFileChange} />
           {form.getValues("thumbnailUrl") && (
             <p className="text-sm text-green-600">
-              Image uploaded: {form.getValues("thumbnailUrl")}
+              Зураг байршуулсан: {form.getValues("thumbnailUrl")}
             </p>
           )}
         </div>
@@ -201,9 +201,9 @@ export default function CourseForm({ course }: CourseFormProps) {
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel>Published</FormLabel>
+                <FormLabel>Нийтлэгдсэн</FormLabel>
                 <FormDescription>
-                  This course will appear on the home page.
+                  Энэ курс нүүр хуудсанд гарч ирнэ.
                 </FormDescription>
               </div>
             </FormItem>
@@ -212,11 +212,11 @@ export default function CourseForm({ course }: CourseFormProps) {
 
         <div className="flex justify-end gap-2">
           <Button type="button" variant="outline" onClick={() => router.back()}>
-            Cancel
+            Цуцлах
           </Button>
           <Button type="submit" disabled={isLoading}>
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Save Course
+            Курс хадгалах
           </Button>
         </div>
       </form>
