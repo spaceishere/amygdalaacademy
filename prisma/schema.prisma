@@ -1,24 +1,22 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  passwordHash  String
-  role          String    @default("STUDENT") // "ADMIN" | "STUDENT"
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  enrollments   Enrollment[]
+  id           String       @id @default(cuid())
+  name         String?
+  email        String       @unique
+  passwordHash String
+  role         String       @default("STUDENT")
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  enrollments  Enrollment[]
 }
 
 model Course {
@@ -32,14 +30,13 @@ model Course {
   isPublished         Boolean      @default(false)
   createdAt           DateTime     @default(now())
   updatedAt           DateTime     @updatedAt
-  episodes            Episode[]
   enrollments         Enrollment[]
+  episodes            Episode[]
 }
 
 model Episode {
   id            String   @id @default(cuid())
   courseId      String
-  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   title         String
   description   String?
   videoUrl      String?
@@ -48,17 +45,18 @@ model Episode {
   isFreePreview Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
 }
 
 model Enrollment {
   id        String   @id @default(cuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   courseId  String
-  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  status    String   @default("PAID") // "PAID", "PENDING"
+  status    String   @default("PAID")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, courseId])
 }
