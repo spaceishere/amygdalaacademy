@@ -30,7 +30,7 @@ export default async function CourseEpisodesPage({
           </Button>
         </Link>
         <h1 className="text-2xl font-bold text-foreground">
-          Эпизодууд: {course.title}
+          Epsoideууд: {course.title}
         </h1>
       </div>
 

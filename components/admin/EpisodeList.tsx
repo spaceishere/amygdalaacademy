@@ -42,7 +42,7 @@ export default function EpisodeList({
       <div className="flex justify-end">
         <Button onClick={() => setIsCreateOpen(true)}>
           <Plus className="mr-2 h-4 w-4" />
-          Эпизод нэмэх
+          Epsoide нэмэх
         </Button>
       </div>
 
@@ -83,7 +83,7 @@ export default function EpisodeList({
         ))}
         {episodes.length === 0 && (
           <p className="text-center text-muted-foreground py-8">
-            Одоогоор эпизод байхгүй.
+            Одоогоор Epsoide байхгүй.
           </p>
         )}
       </div>
@@ -92,7 +92,7 @@ export default function EpisodeList({
       <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Шинэ эпизод нэмэх</DialogTitle>
+            <DialogTitle>Шинэ Epsoide нэмэх</DialogTitle>
           </DialogHeader>
           <EpisodeForm
             courseId={courseId}
@@ -111,7 +111,7 @@ export default function EpisodeList({
       >
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Эпизод засах</DialogTitle>
+            <DialogTitle>Epsoide засах</DialogTitle>
           </DialogHeader>
           {editingEpisode && (
             <EpisodeForm

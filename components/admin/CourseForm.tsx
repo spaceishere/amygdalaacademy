@@ -125,7 +125,7 @@ export default function CourseForm({ course }: CourseFormProps) {
             <FormItem>
               <FormLabel>Гарчиг</FormLabel>
               <FormControl>
-                <Input placeholder="Курсын гарчиг" {...field} />
+                <Input placeholder="хичээлын гарчиг" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -139,7 +139,7 @@ export default function CourseForm({ course }: CourseFormProps) {
             <FormItem>
               <FormLabel>Тайлбар</FormLabel>
               <FormControl>
-                <Textarea placeholder="Курсын тайлбар" {...field} />
+                <Textarea placeholder="хичээлын тайлбар" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -179,7 +179,7 @@ export default function CourseForm({ course }: CourseFormProps) {
         {/* Thumbnail Upload */}
         <div className="space-y-2">
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Миниатюр зураг
+            Thumbnail зураг
           </label>
           <Input type="file" accept="image/*" onChange={handleFileChange} />
           {form.getValues("thumbnailUrl") && (
@@ -203,7 +203,7 @@ export default function CourseForm({ course }: CourseFormProps) {
               <div className="space-y-1 leading-none">
                 <FormLabel>Нийтлэгдсэн</FormLabel>
                 <FormDescription>
-                  Энэ курс нүүр хуудсанд гарч ирнэ.
+                  Энэ хичээл нүүр хуудсанд гарч ирнэ.
                 </FormDescription>
               </div>
             </FormItem>
@@ -216,7 +216,7 @@ export default function CourseForm({ course }: CourseFormProps) {
           </Button>
           <Button type="submit" disabled={isLoading}>
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Курс хадгалах
+            хичээл хадгалах
           </Button>
         </div>
       </form>

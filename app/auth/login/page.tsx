@@ -18,12 +18,13 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Loader2, Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -73,7 +74,7 @@ export default function LoginPage() {
                 <FormItem>
                   <FormLabel>Имэйл</FormLabel>
                   <FormControl>
-                    <Input placeholder="та@жишээ.мн" {...field} />
+                    <Input placeholder="bataa@gmail.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -86,7 +87,24 @@ export default function LoginPage() {
                 <FormItem>
                   <FormLabel>Нууц үг</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <div className="relative">
+                      <Input
+                        placeholder="Нууц үг"
+                        type={showPassword ? "text" : "password"}
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-muted-foreground"
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -103,7 +121,7 @@ export default function LoginPage() {
         </Form>
 
         <p className="mt-4 text-center text-sm text-muted-foreground">
-          {"Бүртгэлгүй юу? "}
+          {"Бүртгэлтэй бол энд дарна уу. "}
           <Link
             href="/auth/register"
             className="text-primary hover:underline font-medium"

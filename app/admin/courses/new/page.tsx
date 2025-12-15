@@ -6,7 +6,7 @@ export default function NewCoursePage() {
   return (
     <div className="max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-foreground">
-        Шинэ курс үүсгэх
+        Шинэ хичээл үүсгэх
       </h1>
       <CourseForm />
     </div>

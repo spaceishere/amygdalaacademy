@@ -142,7 +142,7 @@ export function EpisodeForm({
             <FormItem>
               <FormLabel>Гарчиг</FormLabel>
               <FormControl>
-                <Input placeholder="Эпизодын гарчиг" {...field} />
+                <Input placeholder="Epsoideын гарчиг" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -156,7 +156,7 @@ export function EpisodeForm({
             <FormItem>
               <FormLabel>Тайлбар</FormLabel>
               <FormControl>
-                <Textarea placeholder="Эпизодын тайлбар" {...field} />
+                <Textarea placeholder="Epsoideын тайлбар" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -193,7 +193,7 @@ export function EpisodeForm({
         {/* Thumbnail Upload */}
         <div className="space-y-2">
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Миниатюр зураг
+            Thumbnail зураг
           </label>
           <Input
             type="file"
@@ -227,7 +227,7 @@ export function EpisodeForm({
 
         <Button type="submit" disabled={isLoading} className="w-full">
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {episode ? "Эпизод шинэчлэх" : "Эпизод үүсгэх"}
+          {episode ? "Epsoide шинэчлэх" : "Epsoide үүсгэх"}
         </Button>
       </form>
     </Form>

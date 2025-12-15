@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users } from "lucide-react";
+import { CountUp } from "@/components/CountUp";
 export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const courses = await db.course.findMany({
@@ -25,15 +26,6 @@ export default async function HomePage() {
       <Navbar />
 
       <main className="container mx-auto py-12 px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-            Шинэ ур чадвар эзэмшээрэй
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Бидний курсуудыг судалж, өнөө өдөр сурж эхлээрэй.
-          </p>
-        </div>
-
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {courses.map((course: any) => {
@@ -64,15 +56,16 @@ export default async function HomePage() {
                 <CardContent className="flex-1">
                   <div className="flex items-center text-sm text-muted-foreground mb-2">
                     <Users className="mr-1 h-4 w-4" />
-                    {displayCount} оюутан
+                    <CountUp value={displayCount} />
+                    <span className="ml-1">сурагч одоогоор үзэж байгаа</span>
                   </div>
                   <div className="text-lg font-bold text-foreground">
-                    {course.price === 0 ? "Үнэгүй" : `₮${course.price}`}
+                    {course.price === 0 ? "Үнэгүй" : `${course.price}₮`}
                   </div>
                 </CardContent>
                 <CardFooter>
                   <Link href={`/courses/${course.slug}`} className="w-full">
-                    <Button className="w-full">Курсыг үзэх</Button>
+                    <Button className="w-full">Хичээл үзэх</Button>
                   </Link>
                 </CardFooter>
               </Card>
@@ -80,7 +73,7 @@ export default async function HomePage() {
           })}
           {courses.length === 0 && (
             <div className="col-span-full text-center py-12 text-muted-foreground">
-              Одоогоор курс байхгүй байна. Удахгүй буцаж ирээрэй!
+              Одоогоор хичээл байхгүй байна. Удахгүй буцаж ирээрэй!
             </div>
           )}
         </div>

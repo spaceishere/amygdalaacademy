@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00D4C7"/>
+      <stop offset="55%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#FF2D95"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Mark -->
+  <path fill="url(#g1)" fill-rule="evenodd" d="
+    M 70 175
+    C 35 150, 30 95, 50 60
+    C 72 20, 120 20, 145 60
+    C 165 92, 162 140, 135 160
+    C 120 170, 102 165, 95 150
+    C 115 135, 115 105, 98 88
+    C 80 70, 60 78, 56 100
+    C 52 122, 55 155, 80 172
+    C 78 174, 74 176, 70 175
+    Z
+
+    M 84 148
+    C 71 137, 68 115, 75 98
+    C 83 79, 103 76, 116 86
+    C 130 97, 133 122, 123 137
+    C 114 151, 97 156, 84 148
+    Z
+  "/>
+
+  <circle cx="150" cy="150" r="22" fill="url(#g1)"/>
+</svg>

@@ -27,11 +27,11 @@ export default async function CoursesPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-foreground">Курсууд</h1>
+        <h1 className="text-3xl font-bold text-foreground">хичээлүүд</h1>
         <Link href="/admin/courses/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
-            Шинэ курс үүсгэх
+            Шинэ хичээл үүсгэх
           </Button>
         </Link>
       </div>
@@ -54,7 +54,7 @@ export default async function CoursesPage() {
                   colSpan={5}
                   className="text-center h-24 text-muted-foreground"
                 >
-                  Курс олдсонгүй.
+                  хичээл олдсонгүй.
                 </TableCell>
               </TableRow>
             )}
@@ -79,7 +79,7 @@ export default async function CoursesPage() {
                     <Link href={`/admin/courses/${course.id}/episodes`}>
                       <Button size="sm" variant="outline">
                         <Video className="h-4 w-4 mr-1" />
-                        Эпизод
+                        Epsoide
                       </Button>
                     </Link>
                     <Link href={`/admin/courses/${course.id}/edit`}>

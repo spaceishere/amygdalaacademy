@@ -10,59 +10,79 @@
 
 @layer base {
   :root {
-    /* Light mode - Clean and professional */
-    --background: 0 0% 100%;
-    --foreground: 210 10% 12%;
+    /* Light mode – Brand palette */
+    /* Light background: #F5F7FB */
+    --background: 220 40% 97%;
+    --foreground: 225 23% 6%; /* Text (Dark): #0B0D12 */
     --card: 0 0% 100%;
-    --card-foreground: 210 10% 12%;
+    --card-foreground: 225 23% 6%;
     --popover: 0 0% 100%;
-    --popover-foreground: 210 10% 12%;
-    --primary: 210 100% 50%;
+    --popover-foreground: 225 23% 6%;
+    /* Primary (Teal): #00D4C7 */
+    --primary: 176 100% 42%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 160 84% 39%;
+    /* Secondary button: dark background with white text */
+    --secondary: 225 23% 6%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 210 11% 91%;
-    --muted-foreground: 210 10% 40%;
-    --accent: 40 100% 50%;
-    --accent-foreground: 210 10% 12%;
+    /* Muted surface and text */
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 8% 40%;
+    /* Accent (Magenta): #FF2D95 */
+    --accent: 330 100% 59%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 11% 91%;
-    --input: 210 11% 91%;
-    --ring: 210 100% 50%;
-    --chart-1: 210 100% 50%;
-    --chart-2: 160 84% 39%;
-    --chart-3: 40 100% 50%;
-    --chart-4: 280 85% 44%;
-    --chart-5: 340 75% 55%;
+    /* Border (Light): #E6EAF2 */
+    --border: 220 30% 92%;
+    --input: 220 30% 92%;
+    /* Focus ring follows primary */
+    --ring: 176 100% 42%;
+    /* Charts can loosely follow brand */
+    --chart-1: 176 100% 42%;
+    --chart-2: 330 100% 59%;
+    --chart-3: 262 83% 58%; /* Support (Violet): #7C3AED */
+    --chart-4: 220 15% 92%;
+    --chart-5: 225 23% 6%;
     --radius: 0.5rem;
   }
   .dark {
-    /* Dark mode - Modern and comfortable */
-    --background: 210 40% 8%;
-    --foreground: 210 40% 96%;
-    --card: 210 40% 12%;
-    --card-foreground: 210 40% 96%;
-    --popover: 210 40% 12%;
-    --popover-foreground: 210 40% 96%;
-    --primary: 210 100% 50%;
-    --primary-foreground: 210 40% 8%;
-    --secondary: 160 84% 39%;
-    --secondary-foreground: 210 40% 8%;
-    --muted: 210 40% 25%;
-    --muted-foreground: 210 40% 70%;
-    --accent: 40 100% 50%;
-    --accent-foreground: 210 40% 8%;
+    /* Dark mode – tuned for brand */
+    --background: 225 40% 6%;
+    --foreground: 0 0% 100%;
+    --card: 225 30% 10%;
+    --card-foreground: 0 0% 100%;
+    --popover: 225 30% 10%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 176 100% 42%;
+    --primary-foreground: 225 40% 6%;
+    --secondary: 225 23% 12%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 225 15% 20%;
+    --muted-foreground: 220 15% 80%;
+    --accent: 330 100% 59%;
+    --accent-foreground: 225 40% 6%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 8%;
-    --border: 210 40% 20%;
-    --input: 210 40% 20%;
-    --ring: 210 100% 50%;
-    --chart-1: 210 100% 50%;
-    --chart-2: 160 84% 39%;
-    --chart-3: 40 100% 50%;
-    --chart-4: 280 85% 44%;
-    --chart-5: 340 75% 55%;
+    --destructive-foreground: 225 40% 6%;
+    --border: 225 15% 25%;
+    --input: 225 15% 25%;
+    --ring: 176 100% 42%;
+    --chart-1: 176 100% 42%;
+    --chart-2: 330 100% 59%;
+    --chart-3: 262 83% 58%;
+    --chart-4: 225 15% 25%;
+    --chart-5: 0 0% 100%;
+  }
+}
+
+@layer utilities {
+  /* Brand gradient – use only for hero, section accents, icons/lines */
+  .bg-brand-gradient {
+    background-image: linear-gradient(
+      135deg,
+      #00d4c7 0%,
+      #7c3aed 55%,
+      #ff2d95 100%
+    );
   }
 }
 

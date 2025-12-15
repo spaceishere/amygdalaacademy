@@ -80,7 +80,7 @@ export default async function CourseDetailPage({
                     <Lock className="h-12 w-12 mb-4 text-primary-foreground/50" />
                     <h3 className="text-xl font-bold">Агуулга түгжигдсэн</h3>
                     <p className="text-primary-foreground/80 mb-4">
-                      Энэ эпизодыг үзэхийн тулд та элсэлтэй байх ёстой.
+                      Энэ Epsoideыг үзэхийн тулд та элсэлтэй байх ёстой.
                     </p>
                     {!isEnrolled && (
                       <EnrollButton
@@ -130,7 +130,7 @@ export default async function CourseDetailPage({
 
             <div className="bg-card p-6 rounded shadow-sm border border-border">
               <h2 className="text-2xl font-bold mb-2 text-foreground">
-                {activeEpisode ? activeEpisode.title : "Курсын тойм"}
+                {activeEpisode ? activeEpisode.title : "хичээлын тойм"}
               </h2>
               <p className="text-muted-foreground">
                 {activeEpisode ? activeEpisode.description : course.description}
@@ -142,7 +142,7 @@ export default async function CourseDetailPage({
           <div className="lg:col-span-1 space-y-6">
             <div className="bg-card rounded-lg shadow-sm border border-border p-4">
               <h3 className="font-bold text-lg mb-4 text-foreground">
-                Курсын агуулга
+                хичээлын агуулга
               </h3>
               <div className="space-y-1">
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
@@ -205,7 +205,7 @@ export default async function CourseDetailPage({
                 })}
                 {course.episodes.length === 0 && (
                   <p className="text-center text-muted-foreground py-4 text-sm">
-                    Одоогоор эпизод байхгүй байна.
+                    Одоогоор Epsoide байхгүй байна.
                   </p>
                 )}
               </div>

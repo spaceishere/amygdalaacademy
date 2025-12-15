@@ -38,7 +38,7 @@ export default async function AdminLayout({
               className="w-full justify-start text-primary-foreground hover:bg-primary/90"
             >
               <BookOpen className="mr-2 h-4 w-4" />
-              Курсууд
+              Хичээлүүд
             </Button>
           </Link>
           <Link href="/admin/users">
@@ -50,23 +50,14 @@ export default async function AdminLayout({
               Хэрэглэгчид
             </Button>
           </Link>
-          <Link href="/admin/enrollments">
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-primary-foreground hover:bg-primary/90"
-            >
-              <BookOpen className="mr-2 h-4 w-4" />
-              Элсэлтүүд
-            </Button>
-          </Link>
         </nav>
         <div className="p-4 border-t border-primary/20">
-          <Link href="/api/auth/signout" className="w-full block">
-            <Button variant="destructive" className="w-full">
+          <form action="/api/auth/signout" method="POST" className="w-full">
+            <Button type="submit" variant="destructive" className="w-full">
               <LogOut className="mr-2 h-4 w-4" />
               Гарах
             </Button>
-          </Link>
+          </form>
         </div>
       </aside>
 

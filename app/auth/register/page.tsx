@@ -17,14 +17,14 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Loader2, Eye, EyeOff, CheckCircle2, Circle } from "lucide-react";
 import { registerUser } from "@/actions/auth"; // Need to create this action
 
 export default function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -33,6 +33,12 @@ export default function RegisterPage() {
       name: "",
     },
   });
+
+  const passwordValue = form.watch("password") || "";
+  const hasUppercase = /[A-Z]/.test(passwordValue);
+  const hasLowercase = /[a-z]/.test(passwordValue);
+  const hasSpecial = /[^A-Za-z0-9]/.test(passwordValue);
+  const hasMinLength = passwordValue.length >= 6;
 
   async function onSubmit(values: z.infer<typeof RegisterSchema>) {
     setIsLoading(true);
@@ -68,7 +74,7 @@ export default function RegisterPage() {
                 <FormItem>
                   <FormLabel>Нэр</FormLabel>
                   <FormControl>
-                    <Input placeholder="Жон Доу" {...field} />
+                    <Input placeholder="Бат" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,7 +87,7 @@ export default function RegisterPage() {
                 <FormItem>
                   <FormLabel>Имэйл</FormLabel>
                   <FormControl>
-                    <Input placeholder="та@жишээ.мн" {...field} />
+                    <Input placeholder="bataa@gmail.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -94,8 +100,90 @@ export default function RegisterPage() {
                 <FormItem>
                   <FormLabel>Нууц үг</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-muted-foreground"
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
+                  <div className="mt-2 space-y-1 text-xs">
+                    <div className="flex items-center gap-2">
+                      {hasUppercase ? (
+                        <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                      ) : (
+                        <Circle className="h-4 w-4 text-muted-foreground" />
+                      )}
+                      <span
+                        className={
+                          hasUppercase
+                            ? "text-emerald-600"
+                            : "text-muted-foreground"
+                        }
+                      >
+                        Том үсэг /A, B, C .../
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {hasLowercase ? (
+                        <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                      ) : (
+                        <Circle className="h-4 w-4 text-muted-foreground" />
+                      )}
+                      <span
+                        className={
+                          hasLowercase
+                            ? "text-emerald-600"
+                            : "text-muted-foreground"
+                        }
+                      >
+                        Жижиг үсэг /a, b, c .../
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {hasSpecial ? (
+                        <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                      ) : (
+                        <Circle className="h-4 w-4 text-muted-foreground" />
+                      )}
+                      <span
+                        className={
+                          hasSpecial
+                            ? "text-emerald-600"
+                            : "text-muted-foreground"
+                        }
+                      >
+                        Тусгай тэмдэгт /@, #, $ .../
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {hasMinLength ? (
+                        <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                      ) : (
+                        <Circle className="h-4 w-4 text-muted-foreground" />
+                      )}
+                      <span
+                        className={
+                          hasMinLength
+                            ? "text-emerald-600"
+                            : "text-muted-foreground"
+                        }
+                      >
+                        6-с дээш оронтой
+                      </span>
+                    </div>
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
@@ -111,7 +199,7 @@ export default function RegisterPage() {
         </Form>
 
         <p className="mt-4 text-center text-sm text-muted-foreground">
-          {"Аль хэдийн бүртгэлтэй юу? "}
+          {"Бүртгэлтэй бол энд дарна уу. "}
           <Link
             href="/auth/login"
             className="text-primary hover:underline font-medium"

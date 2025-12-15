@@ -11,7 +11,12 @@ export const LoginSchema = z.object({
 
 export const RegisterSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  password: z
+    .string()
+    .min(6, "Нууц үг дор хаяж 6 тэмдэгт байх ёстой")
+    .regex(/[A-Z]/, "Том үсэг /A, B, C .../ агуулах ёстой")
+    .regex(/[a-z]/, "Жижиг үсэг /a, b, c .../ агуулах ёстой")
+    .regex(/[^A-Za-z0-9]/, "Тусгай тэмдэгт /@, #, $ .../ агуулах ёстой"),
   name: z.string().min(1, "Name is required"),
 });
 
