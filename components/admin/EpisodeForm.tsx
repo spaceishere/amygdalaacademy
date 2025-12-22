@@ -19,6 +19,7 @@ import {
 import { createEpisode, updateEpisode } from "@/actions/episodes";
 import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 type EpisodeFormProps = {
   courseId: string;
@@ -40,6 +41,8 @@ export function EpisodeForm({
   onSuccess,
 }: EpisodeFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [thumbnailProgress, setThumbnailProgress] = useState(0);
 
   const form = useForm<z.infer<typeof EpisodeSchema>>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -92,17 +95,43 @@ export function EpisodeForm({
     formData.append("file", file);
 
     setIsLoading(true);
+    setUploadProgress(0);
+
     try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
+      const xhr = new XMLHttpRequest();
+
+      xhr.upload.addEventListener("progress", (e) => {
+        if (e.lengthComputable) {
+          const percentComplete = Math.round((e.loaded / e.total) * 100);
+          setUploadProgress(percentComplete);
+        }
       });
-      const data = await res.json();
-      if (data.url) {
-        form.setValue("videoUrl", data.url);
-      }
+
+      xhr.addEventListener("load", () => {
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText);
+          if (data.url) {
+            form.setValue("videoUrl", data.url);
+          }
+          setUploadProgress(100);
+        }
+      });
+
+      xhr.addEventListener("error", () => {
+        console.error("Upload failed");
+        setUploadProgress(0);
+      });
+
+      xhr.open("POST", "/api/upload");
+      xhr.send(formData);
+
+      await new Promise((resolve, reject) => {
+        xhr.addEventListener("load", resolve);
+        xhr.addEventListener("error", reject);
+      });
     } catch {
       console.error("Upload failed");
+      setUploadProgress(0);
     } finally {
       setIsLoading(false);
     }
@@ -116,17 +145,43 @@ export function EpisodeForm({
     formData.append("file", file);
 
     setIsLoading(true);
+    setThumbnailProgress(0);
+
     try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
+      const xhr = new XMLHttpRequest();
+
+      xhr.upload.addEventListener("progress", (e) => {
+        if (e.lengthComputable) {
+          const percentComplete = Math.round((e.loaded / e.total) * 100);
+          setThumbnailProgress(percentComplete);
+        }
       });
-      const data = await res.json();
-      if (data.url) {
-        form.setValue("thumbnailUrl", data.url);
-      }
+
+      xhr.addEventListener("load", () => {
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText);
+          if (data.url) {
+            form.setValue("thumbnailUrl", data.url);
+          }
+          setThumbnailProgress(100);
+        }
+      });
+
+      xhr.addEventListener("error", () => {
+        console.error("Upload failed");
+        setThumbnailProgress(0);
+      });
+
+      xhr.open("POST", "/api/upload");
+      xhr.send(formData);
+
+      await new Promise((resolve, reject) => {
+        xhr.addEventListener("load", resolve);
+        xhr.addEventListener("error", reject);
+      });
     } catch {
       console.error("Upload failed");
+      setThumbnailProgress(0);
     } finally {
       setIsLoading(false);
     }
@@ -182,10 +237,23 @@ export function EpisodeForm({
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
             Видео файл
           </label>
-          <Input type="file" accept="video/*" onChange={handleVideoUpload} />
-          {form.getValues("videoUrl") && (
+          <Input
+            type="file"
+            accept="video/*"
+            onChange={handleVideoUpload}
+            disabled={isLoading}
+          />
+          {uploadProgress > 0 && uploadProgress < 100 && (
+            <div className="space-y-1">
+              <Progress value={uploadProgress} />
+              <p className="text-sm text-muted-foreground">
+                {uploadProgress}% – Видео байршуулж байна...
+              </p>
+            </div>
+          )}
+          {form.getValues("videoUrl") && uploadProgress === 100 && (
             <p className="text-sm text-green-600 truncate">
-              Видео байршуулсан: {form.getValues("videoUrl")}
+              ✓ Видео амжилттай байршуулсан
             </p>
           )}
         </div>
@@ -199,10 +267,19 @@ export function EpisodeForm({
             type="file"
             accept="image/*"
             onChange={handleThumbnailUpload}
+            disabled={isLoading}
           />
-          {form.getValues("thumbnailUrl") && (
+          {thumbnailProgress > 0 && thumbnailProgress < 100 && (
+            <div className="space-y-1">
+              <Progress value={thumbnailProgress} />
+              <p className="text-sm text-muted-foreground">
+                {thumbnailProgress}% – Зураг байршуулж байна...
+              </p>
+            </div>
+          )}
+          {form.getValues("thumbnailUrl") && thumbnailProgress === 100 && (
             <p className="text-sm text-green-600 truncate">
-              Зураг байршуулсан: {form.getValues("thumbnailUrl")}
+              ✓ Зураг амжилттай байршуулсан
             </p>
           )}
         </div>

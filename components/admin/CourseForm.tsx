@@ -9,6 +9,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Form,
   FormControl,
   FormDescription,
@@ -32,6 +39,9 @@ type CourseFormProps = {
     title: string;
     description: string | null;
     price: number;
+    discountPercent?: number;
+    discountEndDate?: Date | null;
+    category?: string | null;
     fakeEnrollmentBonus: number;
     isPublished: boolean;
     thumbnailUrl: string | null;
@@ -49,6 +59,11 @@ export default function CourseForm({ course }: CourseFormProps) {
       title: course?.title || "",
       description: course?.description || "",
       price: course?.price || 0,
+      discountPercent: course?.discountPercent || 0,
+      discountEndDate: course?.discountEndDate
+        ? new Date(course.discountEndDate).toISOString().slice(0, 16)
+        : undefined,
+      category: course?.category || undefined,
       fakeEnrollmentBonus: course?.fakeEnrollmentBonus || 0,
       isPublished: course?.isPublished || false,
       thumbnailUrl: course?.thumbnailUrl || undefined,
@@ -175,6 +190,86 @@ export default function CourseForm({ course }: CourseFormProps) {
             )}
           />
         </div>
+
+        {/* Discount Section */}
+        <div className="border rounded-lg p-4 space-y-4">
+          <h3 className="font-semibold text-sm">Хямдралын тохиргоо</h3>
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="discountPercent"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Хямдрал (%)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      min="0"
+                      max="100"
+                      placeholder="0-100"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    0-100 хооронд хувь оруулна уу
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="discountEndDate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Хямдрал дуусах огноо</FormLabel>
+                  <FormControl>
+                    <Input type="datetime-local" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Хямдрал хэзээ дуусахыг тохируулна
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        {/* Category Selection */}
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Ангилал</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Ангилал сонгох" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="Social Marketing">
+                    Social Marketing
+                  </SelectItem>
+                  <SelectItem value="Digital Marketing">
+                    Digital Marketing
+                  </SelectItem>
+                  <SelectItem value="Branding">Branding</SelectItem>
+                  <SelectItem value="Web Development">
+                    Web Development
+                  </SelectItem>
+                  <SelectItem value="Photography">Photography</SelectItem>
+                  <SelectItem value="Business">Business</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormDescription>Хичээлийн ангилал сонгоно уу</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         {/* Thumbnail Upload */}
         <div className="space-y-2">
